@@ -1,118 +1,60 @@
-// import { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useMutation } from '@tanstack/react-query';
-// import { login } from '../api/auth';
-// import useAuthStore from '../store/authStore';
-// import toast from 'react-hot-toast';
-
-// const Login = () => {
-//   const [formData, setFormData] = useState({ email: '', password: '' });
-//   const navigate = useNavigate();
-//   const setAuth = useAuthStore((state) => state.setAuth);
-
-//   const mutation = useMutation({
-//     mutationFn: login,
-//     onSuccess: (data) => {
-//       // localStorage.setItem('user', JSON.stringify(data.user));
-//       // localStorage.setItem('accessToken', data.accessToken);
-//       // localStorage.setItem('refreshToken', data.refreshToken);
-
-//       setAuth(data.user, data.accessToken, data.refreshToken); // updates Zustand + persist
-
-
-//       toast.success('Login successful!');
-//       navigate('/dashboard');
-//     },
-//     onError: (error) => {
-//       toast.error(error.response?.data?.message || 'Login failed');
-//     },
-//   });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     mutation.mutate(formData);
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
-//       <div className="card w-full max-w-md shadow-2xl bg-base-100">
-//         <div className="card-body">
-//           <h2 className="card-title text-3xl justify-center mb-4">Login</h2>
-
-//           <form onSubmit={handleSubmit}>
-//             <div className="form-control mb-4">
-//               <label className="label">
-//                 <span className="label-text">Email</span>
-//               </label>
-//               <input
-//                 type="email"
-//                 placeholder="Enter your email"
-//                 className="input input-bordered"
-//                 value={formData.email}
-//                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-//                 required
-//               />
-//             </div>
-
-//             <div className="form-control mb-4">
-//               <label className="label">
-//                 <span className="label-text">Password</span>
-//               </label>
-//               <input
-//                 type="password"
-//                 placeholder="Enter your password"
-//                 className="input input-bordered"
-//                 value={formData.password}
-//                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-//                 required
-//               />
-//             </div>
-
-//             <div className="form-control mt-6">
-//               <button
-//                 type="submit"
-//                 className="btn btn-primary"
-//                 disabled={mutation.isPending}
-//               >
-//                 {mutation.isPending ? 'Logging in...' : 'Login'}
-//               </button>
-//             </div>
-//           </form>
-
-//           <div className="text-center mt-4">
-//             <span className="text-sm">
-//               Don't have an account?{' '}
-//               <Link to="/signup" className="link link-primary">
-//                 Sign up
-//               </Link>
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
 // export default Login;
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { login } from '../api/auth';
 import useAuthStore from '../store/authStore';
 import toast from 'react-hot-toast';
-import loginBg from '../asset/login-bg.jpg'; // Example background image
+import loginBg from '../asset/login-bg.jpg';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth);
+  // const setAuth = useAuthStore((state) => state.setAuth);
+
+  const { setAuth, isAuthenticated, user } = useAuthStore(); // Get isAuthenticated and user
+
+
+  // const mutation = useMutation({
+  //   mutationFn: login,
+  //   onSuccess: (data) => {
+
+  //     setAuth(data.user, data.accessToken, data.refreshToken);
+  //     toast.success('Login successful!');
+
+  //     // Navigate based on user role
+  //     if (data.user.role === 'ADMIN') {
+  //       navigate('/admin');
+  //     } else {
+  //       navigate('/dashboard');
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     toast.error(error.response?.data?.message || 'Login failed');
+  //   },
+  // });
+
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const redirectPath = user.role === 'ADMIN' ? '/admin' : '/dashboard';
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, user, navigate]);
 
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
       setAuth(data.user, data.accessToken, data.refreshToken);
       toast.success('Login successful!');
-      navigate('/dashboard');
+
+      // Navigate based on role
+      if (data.user.role === 'ADMIN') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Login failed');

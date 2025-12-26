@@ -92,19 +92,19 @@
 
 //               <div className="space-y-4 mb-6">
 //                 <div className="flex items-center gap-3">
-//                   <MapPin className="w-5 h-5 text-primary" />
+//                   <MapPin className="w-5 h-5 " />
 //                   <span className="text-lg">{event.location}</span>
 //                 </div>
 //                 <div className="flex items-center gap-3">
-//                   <Calendar className="w-5 h-5 text-primary" />
+//                   <Calendar className="w-5 h-5 " />
 //                   <span className="text-lg">{formatDate(event.date)}</span>
 //                 </div>
 //                 <div className="flex items-center gap-3">
-//                   <Clock className="w-5 h-5 text-primary" />
+//                   <Clock className="w-5 h-5 " />
 //                   <span className="text-lg">{event.time}</span>
 //                 </div>
 //                 <div className="flex items-center gap-3">
-//                   <Users className="w-5 h-5 text-primary" />
+//                   <Users className="w-5 h-5 " />
 //                   <span className="text-lg">{event.attendees} attendees</span>
 //                 </div>
 //               </div>
@@ -260,19 +260,19 @@
 
 //                 <div className="space-y-4 mb-6">
 //                   <div className="flex items-center gap-3">
-//                     <MapPin className="w-5 h-5 text-primary" />
+//                     <MapPin className="w-5 h-5 " />
 //                     <span className="text-lg">{event.location}</span>
 //                   </div>
 //                   <div className="flex items-center gap-3">
-//                     <Calendar className="w-5 h-5 text-primary" />
+//                     <Calendar className="w-5 h-5 " />
 //                     <span className="text-lg">{formatDate(event.date)}</span>
 //                   </div>
 //                   <div className="flex items-center gap-3">
-//                     <Clock className="w-5 h-5 text-primary" />
+//                     <Clock className="w-5 h-5 " />
 //                     <span className="text-lg">{event.time}</span>
 //                   </div>
 //                   <div className="flex items-center gap-3">
-//                     <Users className="w-5 h-5 text-primary" />
+//                     <Users className="w-5 h-5 " />
 //                     <span className="text-lg">{event.attendees} attendees</span>
 //                   </div>
 //                 </div>
@@ -431,19 +431,19 @@ const EventDetailModal = ({ eventId, isOpen, onClose }) => {
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-primary" />
+                    <MapPin className="w-5 h-5 " />
                     <span className="text-lg">{event.location}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-primary" />
+                    <Calendar className="w-5 h-5 " />
                     <span className="text-lg">{formatDate(event.date)}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-primary" />
+                    <Clock className="w-5 h-5 " />
                     <span className="text-lg">{event.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-primary" />
+                    <Users className="w-5 h-5 " />
                     <span className="text-lg">{event.attendees} attendees</span>
                   </div>
                 </div>
@@ -501,25 +501,27 @@ const EventDetailModal = ({ eventId, isOpen, onClose }) => {
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-primary" />
+                    <MapPin className="w-5 h-5 " />
                     <span className="text-lg">{event.location}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-primary" />
+                    <Calendar className="w-5 h-5 " />
                     <span className="text-lg">{formatDate(event.date)}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-primary" />
+                    <Clock className="w-5 h-5 " />
                     <span className="text-lg">{event.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-primary" />
+                    <Users className="w-5 h-5 " />
                     <span className="text-lg">{event.attendees} attendees</span>
                   </div>
                 </div>
 
                 <button
-                  className={`btn w-full ${hasJoined ? 'btn-disabled' : 'btn-success'}`}
+                  // className={`btn btn-md w-full text-white bg-[#1AA928] border-[#1AA928] hover:bg-[#15861F] ${hasJoined ? 'btn-disabled' : 'btn-success'}`}
+                  className={`btn btn-md w-full text-white bg-[#1AA928] border-[#1AA928] hover:bg-[#15861F] ${hasJoined ? 'btn-disabled' : 'btn-success'}`}
+
                   onClick={handleJoinClick}
                   disabled={hasJoined}
                 >

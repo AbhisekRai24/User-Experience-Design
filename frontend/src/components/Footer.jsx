@@ -1,4 +1,6 @@
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom"; // ADD THIS LINE
+
 
 export default function Footer() {
     return (
@@ -100,6 +102,13 @@ export default function Footer() {
                                 <span className="text-[14px] text-white/70" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                     Lalitpur, Nepal
                                 </span>
+                            </li>
+
+                            <li> <Link to="/about" className="btn btn-ghost">About Us</Link>
+                            </li>
+
+                            <li>
+                                <Link to="/help" className="btn btn-ghost">Help & Support</Link>
                             </li>
                         </ul>
                     </div>

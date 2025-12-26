@@ -542,7 +542,7 @@ const RegistrationFormModal = ({ isOpen, onClose, onSubmit, eventTitle }) => {
                       Cash Donation
                     </label>
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[16px] text-[#6B6B6B] font-medium">$</span>
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[16px] text-[#6B6B6B] font-medium">Rs</span>
                       <input
                         type="number"
                         min="0"
