@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { getEvents } from '../../api/events';
+import AdminEventsList from '../../components/admin/EventList';
+
+
 import { Link } from 'react-router-dom';
 
 const AdminEventDashboard = () => {
@@ -25,21 +28,12 @@ const AdminEventDashboard = () => {
 
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title">Quick Actions</h2>
-          <div className="card-actions mt-4">
-            <Link
-              to="/admin/events"
-              className="btn bg-[#424CB1] border-[#424CB1] text-white hover:bg-[#2F3A8B] hover:border-[#2F3A8B] transition-all duration-300"
-            >
-              Manage Events
-            </Link>
 
-            <Link
-              to="/admin/events/new"
-              className="btn bg-[#1AA928] border-[#1AA928] text-white hover:bg-[#15861F] hover:border-[#15861F] transition-all duration-300"
-            >
-              Create New Event
-            </Link>
+          <div className="card-actions mt-4">
+            <AdminEventsList />
+
+
+
 
           </div>
         </div>

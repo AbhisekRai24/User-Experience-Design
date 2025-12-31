@@ -2,7 +2,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getEvents, deleteEvent } from '../../api/events';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, Trash2, Users } from 'lucide-react';
+
 
 const AdminEvents = () => {
   const queryClient = useQueryClient();
@@ -43,7 +44,7 @@ const AdminEvents = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Manage Events</h1>
-        <Link to="/admin/events/new" className="btn btn-primary">
+        <Link to="/admin/events/new" className="btn bg-[#1AA928] border-[#1AA928] text-white hover:bg-[#15861F] hover:border-[#15861F] transition-all duration-300">
           Create New Event
         </Link>
       </div>
@@ -65,7 +66,7 @@ const AdminEvents = () => {
                 <div className="card-actions justify-end mt-4">
                   <Link
                     to={`/admin/events/${event._id}/edit`}
-                    className="btn bg-[#424CB1] border-[#424CB1] text-white hover:bg-[#2F3A8B] hover:border-[#2F3A8B] transition-all duration-300"
+                    className="btn bg-[#1AA928] border-[#1AA928] text-white hover:bg-[#15861F] hover:border-[#15861F] transition-all duration-300"
                   >
                     <Edit className="w-4 h-4" />
                     Edit
@@ -79,6 +80,14 @@ const AdminEvents = () => {
                     <Trash2 className="w-4 h-4" />
                     Delete
                   </button>
+                  {/* VIEW VOLUNTEERS BUTTON */}
+                  <Link
+                    to={`/admin/events/${event._id}/volunteers`}
+                    className="btn bg-[#424CB1] border-[#424CB1] text-white hover:bg-[#2F3A8B] hover:border-[#2F3A8B] transition-all duration-300"
+                  >
+                    <Users className="w-4 h-4" />
+                    Volunteers ({event.currentAttendees || 0})
+                  </Link>
 
                 </div>
               </div>

@@ -58,12 +58,12 @@ const HelpPage = () => {
             description: "Information about optional event donations",
             color: "#1AA928"
         },
-        {
-            icon: Settings,
-            title: "Technical Support",
-            description: "Troubleshooting and technical assistance",
-            color: "#6B6B6B"
-        }
+        // {
+        //     icon: Settings,
+        //     title: "Technical Support",
+        //     description: "Troubleshooting and technical assistance",
+        //     color: "#6B6B6B"
+        // }
     ];
 
     return (
