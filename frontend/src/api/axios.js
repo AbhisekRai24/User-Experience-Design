@@ -2,25 +2,26 @@ import axios from 'axios';
 import useAuthStore from '../store/authStore';
 
 const api = axios.create({
-  baseURL: '/api',
-  // Remove the default Content-Type header
+  // baseURL: '/api',
+  baseURL: 'http://localhost:5000/api',
+
 });
 
 api.interceptors.request.use(
   (config) => {
     const { accessToken, isAuthenticated } = useAuthStore.getState();
-    
+
     // Only add token if user is authenticated
     if (isAuthenticated && accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
-    
+
     // Only set Content-Type to JSON if it's not FormData
     if (!(config.data instanceof FormData)) {
       config.headers['Content-Type'] = 'application/json';
     }
     // If it IS FormData, let axios set the Content-Type with boundary automatically
-    
+
     return config;
   },
   (error) => {
@@ -38,7 +39,7 @@ api.interceptors.response.use(
 
       try {
         const { refreshToken, isAuthenticated, logout } = useAuthStore.getState();
-        
+
         // Check if user is authenticated before trying to refresh
         if (!isAuthenticated || !refreshToken) {
           logout();

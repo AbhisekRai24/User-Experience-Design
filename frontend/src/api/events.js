@@ -130,3 +130,7 @@ export const deleteEvent = async (id) => {
   return response.data;
 };
 
+export const getEventVolunteers = async (eventId) => {
+  const response = await api.get(`/events/${eventId}/volunteers`);
+  return response.data;
+};

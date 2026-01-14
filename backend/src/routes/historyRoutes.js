@@ -3,6 +3,7 @@ import {
   joinEvent,
   getUserHistory,
   deleteEventHistory,
+  cancelEventRegistration
 } from '../controllers/historyController.js';
 import { authenticate } from '../middleware/auth.js';
 
@@ -13,6 +14,8 @@ router.post('/join/:eventId', authenticate, joinEvent);
 
 router.get('/user/:userId', authenticate, getUserHistory);
 router.delete('/:id', authenticate, deleteEventHistory);
+router.post('/:id/cancel', authenticate, cancelEventRegistration);
+
 
 export default router;
 

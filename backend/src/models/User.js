@@ -106,7 +106,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['male', 'female', 'other'],
 
-    default: '',
+    // default: '',
     required: false,
   },
   // Notification settings

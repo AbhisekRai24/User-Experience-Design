@@ -40,6 +40,7 @@ const startServer = async () => {
   const { default: leaderboardRoutes } = await import('./routes/leaderboardRoutes.js');
   const { default: wishlistRoutes } = await import('./routes/wishlistRoutes.js');
   const { default: userRoutes } = await import('./routes/usersRoutes.js');
+  const { default: categoryRoutes } = await import('./routes/admin/categoryRoutes.js');
 
 
   app.use('/api/auth', authRoutes);
@@ -49,6 +50,7 @@ const startServer = async () => {
   app.use('/api/notifications', notificationRoutes);
 
   app.use('/api/nusers', userRoutes);
+  app.use('/api/categories', categoryRoutes);
 
   app.use('/api/leaderboard', leaderboardRoutes);
 

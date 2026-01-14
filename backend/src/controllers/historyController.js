@@ -262,6 +262,23 @@ export const joinEvent = async (req, res) => {
 };
 
 // Get user's event history
+// export const getUserHistory = async (req, res) => {
+//   try {
+//     const userId = req.params.userId;
+
+//     const history = await EventHistory.find({ user: userId })
+//       .populate({
+//         path: 'event',
+//         populate: { path: 'createdBy', select: 'username fullName' }
+//       })
+//       .sort({ joinedAt: -1 });
+
+//     res.json(history);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const getUserHistory = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -271,7 +288,7 @@ export const getUserHistory = async (req, res) => {
         path: 'event',
         populate: { path: 'createdBy', select: 'username fullName' }
       })
-      .sort({ joinedAt: -1 });
+      .sort({ createdAt: -1 }); // Changed from joinedAt to createdAt
 
     res.json(history);
   } catch (error) {
@@ -309,6 +326,55 @@ export const deleteEventHistory = async (req, res) => {
       spotsLeft: event ? event.maxAttendees - event.currentAttendees : null
     });
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Cancel event registration (different from deleting history - this is for active cancellation)
+export const cancelEventRegistration = async (req, res) => {
+  try {
+    const { id } = req.params; // This is the eventHistory ID
+    const userId = req.user._id;
+
+    const eventHistory = await EventHistory.findOne({
+      _id: id,
+      user: userId,
+    }).populate('event');
+
+    if (!eventHistory) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
+
+    const event = eventHistory.event;
+
+    // Check if event has already passed
+    const eventDate = new Date(event.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    eventDate.setHours(0, 0, 0, 0);
+
+    if (eventDate < today) {
+      return res.status(400).json({ message: 'Cannot cancel registration for past events' });
+    }
+
+    // Decrement currentAttendees by the registered attendees count
+    const attendeesCount = eventHistory.registrationDetails?.attendees || 1;
+    event.currentAttendees = Math.max(0, event.currentAttendees - attendeesCount);
+    await event.save();
+
+    // Delete the event history entry
+    await EventHistory.findByIdAndDelete(id);
+
+    console.log('✓ Registration cancelled successfully');
+    console.log('✓ Current attendees:', event.currentAttendees, '/', event.maxAttendees);
+
+    res.json({
+      message: 'Registration cancelled successfully',
+      spotsLeft: event.maxAttendees - event.currentAttendees
+    });
+  } catch (error) {
+    console.error('\n❌ CANCEL REGISTRATION ERROR:');
+    console.error('Message:', error.message);
     res.status(500).json({ message: error.message });
   }
 };

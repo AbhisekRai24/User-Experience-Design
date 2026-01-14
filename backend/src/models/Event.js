@@ -62,10 +62,15 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // category: {
+  //   type: String,
+  //   enum: ['Nature', 'Promotional', 'Volunteer', 'All Events'],
+  //   required: true,
+  // },
   category: {
     type: String,
-    enum: ['Nature', 'Promotional', 'Volunteer', 'All Events'],
     required: true,
+    trim: true,
   },
   image: {
     type: String,

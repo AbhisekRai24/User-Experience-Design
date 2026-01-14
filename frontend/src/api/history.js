@@ -7,10 +7,8 @@ import api from './axios';
 // Update your existing joinEvent function to accept registration data
 
 export const joinEvent = async (eventId, registrationData = {}) => {
-  const response = await api.post('/history/join', {
-    eventId,
-    ...registrationData
-  });
+
+  const response = await api.post(`/history/join/${eventId}`, registrationData);
   return response.data;
 };
 
@@ -24,3 +22,7 @@ export const removeFromHistory = async (historyId) => {
   return response.data;
 };
 
+export const cancelEventRegistration = async (historyId) => {
+  const response = await api.post(`/history/${historyId}/cancel`);
+  return response.data;
+};

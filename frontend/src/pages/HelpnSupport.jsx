@@ -148,7 +148,7 @@ const HelpPage = () => {
                 </div>
 
                 {/* Contact Support Section */}
-                <div className="bg-gradient-to-br from-[#57C478] to-[#4BA3F2] rounded-2xl p-8 text-white">
+                <div className="bg-[#57C478]  rounded-2xl p-8 text-white">
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-3">
                             Still Need Help?

@@ -292,33 +292,33 @@
 import { Trophy, Award, Medal, Crown, Calendar, TrendingUp, Users, Sparkles } from 'lucide-react';
 
 // Medal/Trophy component based on rank
-const RankBadge = ({ rank }) => {
-    if (rank === 1) {
-        return (
-            <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white z-10 animate-bounce">
-                <Crown className="w-6 h-6 text-white" />
-            </div>
-        );
-    } else if (rank === 2) {
-        return (
-            <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center shadow-lg border-3 border-white z-10">
-                <Trophy className="w-5 h-5 text-white" />
-            </div>
-        );
-    } else if (rank === 3) {
-        return (
-            <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg border-3 border-white z-10">
-                <Award className="w-5 h-5 text-white" />
-            </div>
-        );
-    } else {
-        return (
-            <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-[#1AA928] to-[#159023] rounded-full flex items-center justify-center shadow-md border-2 border-white z-10">
-                <span className="text-white font-bold text-xs">#{rank}</span>
-            </div>
-        );
-    }
-};
+// const RankBadge = ({ rank }) => {
+//     if (rank === 1) {
+//         return (
+//             <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-xl border-4 border-white z-10 animate-bounce">
+//                 <Crown className="w-6 h-6 text-white" />
+//             </div>
+//         );
+//     } else if (rank === 2) {
+//         return (
+//             <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center shadow-lg border-3 border-white z-10">
+//                 <Trophy className="w-5 h-5 text-white" />
+//             </div>
+//         );
+//     } else if (rank === 3) {
+//         return (
+//             <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg border-3 border-white z-10">
+//                 <Award className="w-5 h-5 text-white" />
+//             </div>
+//         );
+//     } else {
+//         return (
+//             <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-[#1AA928] to-[#159023] rounded-full flex items-center justify-center shadow-md border-2 border-white z-10">
+//                 <span className="text-white font-bold text-xs">#{rank}</span>
+//             </div>
+//         );
+//     }
+// };
 
 // Individual Attendee Card
 const AttendeeCard = ({ attendee, isPodium }) => {
@@ -342,7 +342,7 @@ const AttendeeCard = ({ attendee, isPodium }) => {
                 }`}
             style={{ fontFamily: 'Poppins, sans-serif' }}
         >
-            <RankBadge rank={attendee.rank} />
+            {/* <RankBadge rank={attendee.rank} /> */}
 
             {/* Profile Section */}
             <div className="flex flex-col items-center mb-4">
@@ -355,8 +355,8 @@ const AttendeeCard = ({ attendee, isPodium }) => {
                     />
                     {attendee.rank === 1 && (
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" />
-                            CHAMPION
+                            {/* <Sparkles className="w-3 h-3" />
+                            CHAMPION */}
                         </div>
                     )}
                 </div>
@@ -397,14 +397,14 @@ const AttendeeCard = ({ attendee, isPodium }) => {
             </div>
 
             {/* Rank Badge */}
-            <div className="text-center">
+            {/* <div className="text-center">
                 <div className="inline-flex items-center gap-1 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
                     <Medal className="w-3 h-3 text-[#1AA928]" />
                     <span className="text-xs font-semibold text-[#2E3A3D]">
                         Rank #{attendee.rank}
                     </span>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
